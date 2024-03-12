@@ -6,7 +6,7 @@ app = Flask (__name__)
 app.config['MYSQL_HOST'] = "localhost"
 app.config['MYSQL_USER'] = "root"
 app.config['MYSQL_PASSWORD'] = ""
-app.config['MYSQL DB'] = "users_db"
+app.config['MYSQL_DB'] = "users_db"
 
 mysql = MySQL(app)
 
@@ -18,7 +18,11 @@ def index():
         email = request.form['email']
         
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO users (name,email)")
+        cur.execute("INSERT INTO users (name,email) VALUES (%s,%s)",(username,email))
+
+        mysql.connection.commit()
+        cur.close()
+        return "success"
 
     return render_template('index.html')
 
