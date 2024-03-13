@@ -1,6 +1,15 @@
 <h1>Simple Login form</h1>
     <form method="post" action="/">
-    <input type="text" name="username" required/>
-    <input type="text" name="email" required/>
-    <input type="submit"/>
+        <input type="text" name="username" required/>
+        <input type="text" name="email" required/>
+        <input type="submit"/>
     </form>
+
+    <table border="1">
+        {% for user in userDetails %}
+        <tr>
+            <td>{{user[0]}}</td>
+            <td>{{user[1]}}</td>
+        </tr>
+        {% endfor %}
+    </table>

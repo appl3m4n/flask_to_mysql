@@ -19,23 +19,20 @@ def index():
         
         cur = mysql.connection.cursor()
         cur.execute("INSERT INTO users (name,email) VALUES (%s,%s)",(username,email))
-
         mysql.connection.commit()
         cur.close()
-        return "success"
+
+        #return "success"
 
     return render_template('index.html')
 
-@app.route('/users')
+@app.route('/x', methods=['GET','POST'])
 def users():
     cur = mysql.connection.cursor()
-    
     users = cur.execute("SELECT * FROM users")
-    
     if users > 0:
         userDetails = cur.fetchall()
-
-        return render_template('users.html',userDetails=userDetails)
-
+    return render_template('index.html',userDetails=userDetails)
+    
 if __name__ == "__main__":
     app.run(debug=True)
