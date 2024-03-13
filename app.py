@@ -28,9 +28,10 @@ def index():
 
 @app.route('/users')
 def users():
-    cur =mysql.connection.cursor()
+    cur = mysql.connection.cursor()
     
     users = cur.execute("SELECT * FROM users")
+    
     if users > 0:
         userDetails = cur.fetchall()
 
